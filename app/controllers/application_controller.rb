@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    protect_from_forgery with: :exception
     def index
         @tasks = task.all
     end
@@ -46,11 +47,19 @@ class ApplicationController < ActionController::Base
         flash[:success] = 'taskは正常に削除されました'
         redirect_to task_url
     end   
-    
+
+    include SessionsHelper
+
     private
     
     #Strong Parameter
     def task_params
         params.require(:task).permit(:content)
+    end
+    
+    def require_user_logged_in
+      unless logged_in?
+      redirect_to login_url
+      end
     end
 end
