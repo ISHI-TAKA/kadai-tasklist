@@ -1,12 +1,4 @@
-  Rails.application.routes.draw do
-  get 'users/index'
-
-  get 'users/show'
-
-  get 'users/new'
-
-  get 'users/create'
-
+Rails.application.routes.draw do
   root to: 'toppages#index'
 
   get 'login', to: 'sessions#new'
